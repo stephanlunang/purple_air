@@ -1,6 +1,7 @@
 import sys
 import time
 import requests
+import argparse
 
 from pprint import pprint
 
@@ -123,6 +124,9 @@ class PurpleAPI:
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("cycle_time", type=int, default=300, help="How frequently the script queries the API.")
+    parser.parse_args()
     run_forever = True
     while run_forever:
         try:
@@ -131,7 +135,7 @@ if __name__ == "__main__":
             print("\n\nRating: {}\n\n".format(closest_sensor["category"]))
             pprint(closest_sensor)
             purple.led_dependent_on_air_quality()
-            time.sleep(120)
+            time.sleep(parser.cycle_type)
         except KeyboardInterrupt:
             purple.leds.all_off()
             run_forever = False
