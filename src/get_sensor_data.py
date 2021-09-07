@@ -126,7 +126,7 @@ class PurpleAPI:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("cycle_time", type=int, default=300, help="How frequently the script queries the API.")
-    parser.parse_args()
+    args = parser.parse_args()
     run_forever = True
     while run_forever:
         try:
@@ -135,7 +135,7 @@ if __name__ == "__main__":
             print("\n\nRating: {}\n\n".format(closest_sensor["category"]))
             pprint(closest_sensor)
             purple.led_dependent_on_air_quality()
-            time.sleep(parser.cycle_time)
+            time.sleep(args.cycle_time)
         except KeyboardInterrupt:
             purple.leds.all_off()
             run_forever = False
