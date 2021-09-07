@@ -135,7 +135,7 @@ if __name__ == "__main__":
             print("\n\nRating: {}\n\n".format(closest_sensor["category"]))
             pprint(closest_sensor)
             purple.led_dependent_on_air_quality()
-            time.sleep(parser.cycle_type)
+            time.sleep(parser.cycle_time)
         except KeyboardInterrupt:
             purple.leds.all_off()
             run_forever = False
