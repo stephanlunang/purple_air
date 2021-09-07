@@ -49,3 +49,8 @@ class LEDs:
         GPIO.output(self.green_gpio, GPIO.LOW)
         GPIO.output(self.yellow_gpio, GPIO.LOW)
         GPIO.output(self.red_gpio, GPIO.LOW)
+
+    def blinking_red(self, cycles=3):
+        for i in range(cycles):
+            self.red_only()
+            self.all_off()

@@ -40,9 +40,11 @@ class PurpleAPI:
         _api = "{}/sensors".format(self.base_url)
         response = requests.get(_api, headers=_http_header, params=parameters)
         self._status_code = response.status_code
-        if self._status_code != 200:
+
+        if not response.ok:
             print("Status Code: {}".format(self._status_code))
-            sys.exit()
+            raise ConnectionError("API Error Occurred.")
+
         raw_measurements = response.json()["data"]
         returned_fields = response.json()["fields"]
         self.all_measurements = []
@@ -133,6 +135,7 @@ if __name__ == "__main__":
         except KeyboardInterrupt:
             purple.leds.all_off()
             run_forever = False
+        except ConnectionError:
+            purple.leds.blinking_red()
         finally:
             purple.leds.all_off()
-            run_forever = False

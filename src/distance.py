@@ -1,5 +1,6 @@
 import math
 
+
 class Distance:
     def __init__(self):
         self._lat_deg_to_miles = 69
